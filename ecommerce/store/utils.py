@@ -1,5 +1,6 @@
 import json
 from .models import *
+from user.models import Customer
 
 
 def cookieCart(request):
