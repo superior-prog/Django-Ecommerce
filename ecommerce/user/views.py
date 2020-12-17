@@ -10,9 +10,6 @@ from store.utils import *
 
 @unauthenticated_user
 def login_view(request):
-    data = cartData(request)
-    cartItems = data['cartItems']
-
     if request.POST:
         form = LoginForm(request.POST)
         if form.is_valid():
@@ -26,15 +23,12 @@ def login_view(request):
     form = LoginForm()
     context = {
         'form': form,
-        'cartItems': cartItems,
     }
     return render(request, 'user/login.html', context)
 
 
 @unauthenticated_user
 def register_view(request):
-    data = cartData(request)
-    cartItems = data['cartItems']
 
     if request.method == "POST":
         form = RegistrationForm(request.POST)
@@ -49,7 +43,6 @@ def register_view(request):
         else:
             context = {
                 'form': form,
-                'cartItems': cartItems,
             }
             return render(request, 'user/register.html', context)
     else:
@@ -57,7 +50,6 @@ def register_view(request):
 
     context = {
         'form': form,
-        'cartItems': cartItems,
     }
     return render(request, 'user/register.html', context)
 

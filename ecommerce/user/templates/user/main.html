@@ -79,13 +79,9 @@
             {% if user.is_authenticated %}
             <a href="{% url 'logout' %}" class="btn btn-warning">Logout</a>
             {% else %}
-            <a href="{% url 'login' %}" class="btn btn-dark">Log In</a>
-            <a href="{% url 'register' %}" class="btn btn-warning">Sign Up</a>
+            <a href="{% url 'login' %}" class="btn btn-dark mr-3 rounded">Log In</a>
+            <a href="{% url 'register' %}" class="btn btn-warning mr-3 rounded">Sign Up</a>
             {% endif %}
-            <a href="{% url 'cart' %}">
-                <img id="cart-icon" src="{% static 'images/cart.png' %}">
-            </a>
-            <p id="cart-total">{{ cartItems }}</p>
         </div>
     </div>
 </nav>
@@ -106,6 +102,5 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
         crossorigin="anonymous"></script>
-<script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
 </body>
 </html>

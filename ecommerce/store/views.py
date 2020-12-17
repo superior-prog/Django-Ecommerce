@@ -8,40 +8,40 @@ from .utils import *
 
 def store(request):
     data = cartData(request)
-    cartItems = data['cartItems']
+    cart_items = data['cart_items']
 
     products = Product.objects.all()
     context = {
         'products': products,
-        'cartItems': cartItems,
+        'cart_items': cart_items,
     }
     return render(request, 'store/store.html', context)
 
 
 def cart(request):
     data = cartData(request)
-    cartItems = data['cartItems']
+    cart_items = data['cart_items']
     order = data['order']
     items = data['items']
 
     context = {
         'items': items,
         'order': order,
-        'cartItems': cartItems,
+        'cart_items': cart_items,
     }
     return render(request, 'store/cart.html', context)
 
 
 def checkout(request):
     data = cartData(request)
-    cartItems = data['cartItems']
+    cart_items = data['cart_items']
     order = data['order']
     items = data['items']
 
     context = {
         'items': items,
         'order': order,
-        'cartItems': cartItems,
+        'cart_items': cart_items,
     }
     return render(request, 'store/checkout.html', context)
 

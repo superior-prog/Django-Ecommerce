@@ -16,11 +16,11 @@ def cookieCart(request):
         'get_cart_items': 0,
         'shipping': False,
     }
-    cartItems = order['get_cart_items']
+    cart_items = order['get_cart_items']
 
     for i in cart:
         try:
-            cartItems += cart[i]['quantity']
+            cart_items += cart[i]['quantity']
             product = Product.objects.get(id=i)
             total = (product.price * cart[i]['quantity'])
 
@@ -46,7 +46,7 @@ def cookieCart(request):
     return {
         'items': items,
         'order': order,
-        'cartItems': cartItems,
+        'cart_items': cart_items,
     }
 
 
@@ -55,16 +55,16 @@ def cartData(request):
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, completed=False, )
         items = order.orderitem_set.all()
-        cartItems = order.get_cart_items
+        cart_items = order.get_cart_items
     else:
         cookieData = cookieCart(request)
-        cartItems = cookieData['cartItems']
+        cart_items = cookieData['cart_items']
         order = cookieData['order']
         items = cookieData['items']
     return {
         'items': items,
         'order': order,
-        'cartItems': cartItems,
+        'cart_items': cart_items,
     }
 
 
