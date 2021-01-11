@@ -1,0 +1,53 @@
+{% load static %}
+
+<div class="newsletter-wrap" id="popup-container">
+    <div id="popup-window">
+        <a class="btn closepopup">
+            <i class="icon icon anm anm-times-l"></i>
+        </a>
+        <!-- Modal content-->
+        <div class="display-table splash-bg">
+            <div class="display-table-cell width40">
+                <img alt="Join Our Mailing List"
+                     src="{% static 'assets/images/newsletter-img.jpg' %}" title="Join Our Mailing List"/>
+            </div>
+            <div class="display-table-cell width60 text-center">
+                <div class="newsletter-left">
+                    <h2>Join Our Mailing List</h2>
+                    <p>Sign Up for our exclusive email list and be the first to know about new products and special
+                        offers</p>
+                    <form action="#" method="post">
+                        <div class="input-group">
+                            <input class="input-group__field newsletter__input" name="EMAIL"
+                                   placeholder="Email address" required=""
+                                   type="email" value="">
+                            <span class="input-group__btn">
+                      	<button class="btn newsletter__submit" id="subscribeBtn" name="commit" type="submit"> <span
+                                class="newsletter__submit-text--large">Subscribe</span> </button>
+                      </span>
+                        </div>
+                    </form>
+                    <ul class="list--inline site-footer__social-icons social-icons">
+                        <li><a class="social-icons__link" href="#" title="Facebook"><i
+                                aria-hidden="true" class="fa fa-facebook-official"></i></a></li>
+                        <li><a class="social-icons__link" href="#" title="Twitter"><i aria-hidden="true"
+                                                                                      class="fa fa-twitter"></i></a>
+                        </li>
+                        <li><a class="social-icons__link" href="#" title="Pinterest"><i aria-hidden="true"
+                                                                                        class="fa fa-pinterest"></i></a>
+                        </li>
+                        <li><a class="social-icons__link" href="#" title="Instagram"><i aria-hidden="true"
+                                                                                        class="fa fa-instagram"></i></a>
+                        </li>
+                        <li><a class="social-icons__link" href="#" title="YouTube"><i aria-hidden="true"
+                                                                                      class="fa fa-youtube"></i></a>
+                        </li>
+                        <li><a class="social-icons__link" href="#" title="Vimeo"><i aria-hidden="true"
+                                                                                    class="fa fa-vimeo"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
