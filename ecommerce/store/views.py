@@ -11,8 +11,16 @@ def store(request):
     cart_items = data['cart_items']
 
     products = Product.objects.all()
+    category_name = Category.objects.get(cat_name="Women")
+    women_products = Product.objects.filter(category=category_name)
+    category_name = Category.objects.get(cat_name="Men")
+    men_products = Product.objects.filter(category=category_name)
+    featured_products = FeaturedCollection.objects.all()
     context = {
         'products': products,
+        'women_products': women_products,
+        'men_products': men_products,
+        'featured_products': featured_products,
         'cart_items': cart_items,
     }
     return render(request, 'store/store.html', context)
