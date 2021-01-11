@@ -2,8 +2,25 @@ from django.db import models
 from user.models import Customer
 
 
+class Category(models.Model):
+    cat_name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.cat_name
+
+
+class SubCategory(models.Model):
+    sub_cat_name = models.CharField(max_length=255)
+    cat_name = models.ForeignKey(Category, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.sub_cat_name
+
+
 class Product(models.Model):
     name = models.CharField(max_length=200, null=True)
+    category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.CASCADE)
+    sub_category = models.ForeignKey(SubCategory, null=True, blank=True, on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     digital = models.BooleanField(default=False, null=True, blank=True)
     image = models.ImageField(null=True, blank=True)
@@ -18,6 +35,13 @@ class Product(models.Model):
         except:
             url = ''
         return url
+
+
+class FeaturedCollection(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.product.name)
 
 
 class Order(models.Model):
