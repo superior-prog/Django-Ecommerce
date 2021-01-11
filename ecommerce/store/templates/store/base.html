@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+{% load static %}
+<html class="no-js" lang="en">
+
+<!-- belle/index.html   11 Nov 2019 12:16:10 GMT -->
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+    <meta content="ie=edge" http-equiv="x-ua-compatible">
+    <title>Baazar</title>
+    <meta content="description" name="description">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <!-- Favicon -->
+    <link href="{% static 'assets/images/new-favicon.png' %}" rel="shortcut icon"/>
+    <!-- Plugins CSS -->
+    <link href="{% static 'assets/css/plugins.css' %}" rel="stylesheet">
+    <!-- Bootstap CSS -->
+    <link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Main Style CSS -->
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/css/responsive.css' %}" rel="stylesheet">
+</head>
+<body class="template-index belle template-index-belle">
+<div id="pre-loader">
+    <img alt="Loading..." src="{% static 'assets/images/loader.gif' %}"/>
+</div>
+<div class="pageWrapper">
+
+
+    {% block content %}
+
+
+    {% endblock content %}
+
+
+</div>
+</body>
+
+<!-- belle/index.html   11 Nov 2019 12:20:55 GMT -->
+</html>
