@@ -1,6 +1,9 @@
 {% extends 'store/main.html' %}
+
 {% load static %}
+
 {% block content %}
+
 <div class="row">
     <div class="col-lg-6">
         <div class="box-element" id="form-wrapper">
@@ -8,6 +11,7 @@
                 <div id="user-info">
                     <p>Personal Info</p>
                     <div class="form-field">
+
                         <input required class="form-control" type="text" name="name" placeholder="Name...">
                     </div>
                     <div class="form-field">
@@ -38,7 +42,8 @@
         <br>
         <div class="box-element hidden" id="payment-info">
             <small>Payment Options</small><br/>
-            <button id="make-payment" class="btn btn-primary">Make Payment</button>
+<!--            <button id="make-payment" class="btn btn-primary">Make Payment</button>-->
+
         </div>
     </div>
 
@@ -64,9 +69,31 @@
 
 </div>
 
+<script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD"></script>
+
+<script>
+    paypal.buttons({
+        createOrder: function (data, action) {
+            return action.order.create({
+                purchase_units:[{
+                    amount: {
+                        value: '0.01'
+                    }
+                }]
+            });
+        },
+
+        onApprove: function (data, action) {
+            return actions.order.capture().then(function (details) {
+                alert('Transaction completed by ' + details.payer.name.given_name + ']');
+            });
+        }
+    }).render('#paypal-button-container');
+</script>
+
 <script type="text/javascript">
-    var shipping = '{{order.shipping}}'
-    var total = '{{order.get_cart_total}}'
+    const shipping = '{{order.shipping}}';
+    const total = '{{order.get_cart_total}}';
 
     if (shipping == 'False') {
         document.getElementById('shipping-info').innerHTML = '';
@@ -81,7 +108,7 @@
         document.getElementById('payment-info').classList.remove('hidden');
     }
 
-    var form = document.getElementById('form');
+    const form = document.getElementById('form');
     form.addEventListener('submit', function (e) {
         e.preventDefault()
         console.log('form submitted')
@@ -89,25 +116,25 @@
         document.getElementById('payment-info').classList.remove('hidden')
     })
 
-    document.getElementById('make-payment').addEventListener('click', function (e) {
-        submitFormData()
-    })
+    // document.getElementById('make-payment').addEventListener('click', function (e) {
+    //     submitFormData()
+    // })
 
     function submitFormData() {
         console.log('Payment button clicked')
 
-        var userFormData = {
+        const userFormData = {
             'name': null,
             'email': null,
             'total': total,
-        }
+        };
 
-        var shippingInfo = {
+        const shippingInfo = {
             'address': null,
             'city': null,
             'state': null,
             'zipcode': null,
-        }
+        };
 
         if (shipping != 'False') {
             shippingInfo.address = form.address.value
@@ -121,7 +148,7 @@
             userFormData.email = form.email.value
         }
 
-        var url = 'process-order/'
+        const url = 'process-order/';
         fetch(url, {
             method: 'POST',
             headers: {
@@ -142,4 +169,5 @@
         })
     }
 </script>
+
 {% endblock content %}
