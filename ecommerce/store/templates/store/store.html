@@ -47,76 +47,48 @@
                         <i class="icon anm anm-bag-l"></i>
                         <span class="site-header__cart-count" data-cart-render="item_count" id="CartCount">{{ cart_items }}</span>
                     </a>
+
+
                     <!--Minicart Popup-->
                     <div class="block block-cart" id="header-cart">
                         <ul class="mini-products-list">
+                            {% for item in items %}
                             <li class="item">
                                 <a class="product-image" href="#">
-                                    <img alt="3/4 Sleeve Kimono Dress"
-                                         src="assets/images/product-images/cape-dress-1.jpg" title=""/>
+                                    <img alt="{{ item.product.name }}"
+                                         src="{{ item.product.imageURL }}" title=""/>
                                 </a>
                                 <div class="product-details">
                                     <a class="remove" href="#"><i aria-hidden="true"
                                                                   class="anm anm-times-l"></i></a>
-                                    <a class="edit-i remove" href="#"><i aria-hidden="true"
-                                                                         class="anm anm-edit"></i></a>
-                                    <a class="pName" href="cart.html">Sleeve Kimono Dress</a>
+
+                                    <a class="pName" href="cart.html">{{ item.product.name }}</a>
                                     <div class="variant-cart">Black / XL</div>
                                     <div class="wrapQtyBtn">
                                         <div class="qtyField">
                                             <span class="label">Qty:</span>
-                                            <a class="qtyBtn minus" href="javascript:void(0);"><i
+                                            <a class="change-quantity update-cart qtyBtn minus" data-product="{{ item.product.id }}" data-action="remove"><i
                                                     aria-hidden="true" class="fa anm anm-minus-r"></i></a>
-                                            <input class="product-form__input qty" id="Quantity" name="quantity"
+                                            <input class="product-form__input qty" name="quantity"
                                                    type="text"
-                                                   value="1">
-                                            <a class="qtyBtn plus" href="javascript:void(0);"><i
+                                                   value="{{ item.quantity }}" disabled>
+                                            <a class="qtyBtn plus change-quantity update-cart" data-product="{{ item.product.id }}" data-action="add"><i
                                                     aria-hidden="true" class="fa anm anm-plus-r"></i></a>
                                         </div>
                                     </div>
                                     <div class="priceRow">
                                         <div class="product-price">
-                                            <span class="money">$59.00</span>
+                                            <span class="money">${{item.get_total|floatformat:2 }}</span>
                                         </div>
                                     </div>
                                 </div>
                             </li>
-                            <li class="item">
-                                <a class="product-image" href="#">
-                                    <img alt="Elastic Waist Dress - Black / Small"
-                                         src="assets/images/product-images/cape-dress-2.jpg" title=""/>
-                                </a>
-                                <div class="product-details">
-                                    <a class="remove" href="#"><i aria-hidden="true"
-                                                                  class="anm anm-times-l"></i></a>
-                                    <a class="edit-i remove" href="#"><i aria-hidden="true"
-                                                                         class="anm anm-edit"></i></a>
-                                    <a class="pName" href="cart.html">Elastic Waist Dress</a>
-                                    <div class="variant-cart">Gray / XXL</div>
-                                    <div class="wrapQtyBtn">
-                                        <div class="qtyField">
-                                            <span class="label">Qty:</span>
-                                            <a class="qtyBtn minus" href="javascript:void(0);"><i
-                                                    aria-hidden="true" class="fa anm anm-minus-r"></i></a>
-                                            <input class="product-form__input qty" id="Quantity" name="quantity"
-                                                   type="text"
-                                                   value="1">
-                                            <a class="qtyBtn plus" href="javascript:void(0);"><i
-                                                    aria-hidden="true" class="fa anm anm-plus-r"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="priceRow">
-                                        <div class="product-price">
-                                            <span class="money">$99.00</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
+                            {% endfor%}
                         </ul>
                         <div class="total">
                             <div class="total-in">
                                 <span class="label">Cart Subtotal:</span><span class="product-price"><span
-                                    class="money">$748.00</span></span>
+                                    class="money">${{ order.get_cart_total|floatformat:2 }}</span></span>
                             </div>
                             <div class="buttonSet text-center">
                                 <a class="btn btn-secondary btn--small" href="{% url 'cart' %}">View Cart</a>
@@ -1545,9 +1517,6 @@
 <!-- Newsletter Popup -->
 {% include "./widgets/newsletter.html" %}
 <!-- End Newsletter Popup -->
-
-
-{% include "./widgets/javascripts.html" %}
 
 <!--For Newsletter Popup-->
 <script>
