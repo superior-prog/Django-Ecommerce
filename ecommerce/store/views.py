@@ -9,6 +9,8 @@ from .utils import *
 def store(request):
     data = cartData(request)
     cart_items = data['cart_items']
+    items = data['items']
+    order = data['order']
 
     products = Product.objects.all()
     category_name = Category.objects.get(cat_name="Women")
@@ -22,6 +24,8 @@ def store(request):
         'men_products': men_products,
         'featured_products': featured_products,
         'cart_items': cart_items,
+        'items': items,
+        'order': order,
     }
     return render(request, 'store/store.html', context)
 
